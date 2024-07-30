@@ -1,0 +1,42 @@
+#Variables
+symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+
+while True:
+    print('Do you want to (e)ncrpyt or (d)ecrypt')
+    response = input('> ').lower()
+    if response == 'e':
+        mode = 'encrypt'
+        break
+    elif response == 'd':
+        mode = 'decrypt'
+        break
+    print('Please enter the letter e or d.')
+
+maxKey = len(symbols) - 1
+while True:
+    print('Please enter the key (0 to {}) to use.'.format(maxKey))
+    response = input('> ')
+    if not response.isdecimal():
+        continue
+    key = int(response)
+    if 0 <= key <= maxKey:
+        break
+
+print('Enter the message to {}.'.format(mode))
+message = input('> ').upper()
+
+translated = ''
+
+for symbol in message:
+    if symbol in symbols:
+        num = symbols.find(symbol)
+        if mode == 'encrypt':
+            num = (num + key) % len(symbols)
+        elif mode == 'decrypt':
+            num = (num - key) % len(symbols)
+        translated = translated + symbols[num]
+    else:
+        translated = translated + symbol
+
+print(translated)
