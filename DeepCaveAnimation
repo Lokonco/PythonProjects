@@ -1,0 +1,53 @@
+# Deep cave animation inspired by InventWithPython by Al Sweigart
+# this can be used for a game or to learn about
+
+# Import needed libs
+import random
+import time
+
+# Set up constants
+Width = 70
+PauseAmount = 0.05
+
+
+print("Welcome to the DeepCave")
+print("program will run for 3 seconds") 
+time.sleep(2)
+
+# Widths for cave
+leftWidth = 20
+gapWidth = 10
+
+#Vars
+start = time.time() #Getting start time for program
+run = True
+totalTime = 3
+
+while run:
+    # display walls segment
+    checkTime = time.time() - start
+    if checkTime >= totalTime: #Checking if program is running for more than 3 secs
+        run = False             #If program is running for more than 3 secs then quit.
+        continue
+
+
+    rightWidth = Width - gapWidth - leftWidth
+    print(('#' * leftWidth) + (' ' * gapWidth) + ('#' * rightWidth))
+
+    # Adjust left side width
+    diceRoll = random.randint(1,6)
+    if diceRoll == 1 and leftWidth > 1:
+        leftWidth = leftWidth - 1 # Decreasing the left width
+    elif diceRoll == 2 and leftWidth + gapWidth < Width - 1:
+        leftWidth = leftWidth + 1
+    else:
+        pass
+
+    # Adjust gap width
+    diceRoll = random.randint(1, 6)
+    if diceRoll == 1 and gapWidth > 1:
+        gapWidth = gapWidth - 1
+    elif diceRoll == 2 and leftWidth + gapWidth < Width - 1:
+        gapWidth = gapWidth + 1
+    else:
+        pass
